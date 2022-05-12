@@ -1,23 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useState } from 'react';
+import Widgets from './Widgets.js';
+import {Routes, Route, Link} from 'react-router-dom';
+import './styles.css';
+import Info from './Info.js';
+
+
 
 function App() {
+  const url = 'https://breakingbadapi.com/api/';
+  const [character_data, setCharData] = useState([]);
+
+  useEffect(() => {
+    let charUrl = url + "characters";
+    fetch(charUrl).then(response => response.json()).then(data => setCharData(data));
+  }, [])
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      
+          <h1>Breaking Bad Library</h1>
+          <div className='container'>
+          <Routes>      
+            <Route path='/:id' element={<Info />}></Route>
+          </Routes>
+          {character_data.map(character => {
+            return(
+              <Link key={character.char_id} to={"/" + character.char_id} state={character}>
+                <Widgets  character={character}></Widgets>
+              </Link>
+            )
+          })}
+  
+    
+      </div>
     </div>
   );
 }
