@@ -18,20 +18,20 @@ function App() {
     <div className="App">
       
           <h1>Breaking Bad Library</h1>
-          <div className='container'>
           <Routes>      
-            <Route path='/:id' element={<Info />}></Route>
+            <Route path='/' element={<Widgets characters={character_data}/>}></Route>
+            <Route path='/:id' element={<Info characters={character_data}/>}></Route>
           </Routes>
-          {character_data.map(character => {
+          
+          {/* {character_data.map(character => {
             return(
               <Link key={character.char_id} to={"/" + character.char_id} state={character}>
                 <Widgets  character={character}></Widgets>
               </Link>
             )
-          })}
+          })} */}
   
     
-      </div>
     </div>
   );
 }
