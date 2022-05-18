@@ -12,8 +12,10 @@ function App() {
 
   useEffect(() => {
     let charUrl = url + "characters";
-    fetch(charUrl).then(response => response.json()).then(data => setCharData(data));
+    fetch(charUrl).then(response => response.json()).then(data =>  {data.map((character,index) => {character.char_id = index + 1; setCharData(prevData => [...prevData, character])})});
+
   }, [])
+  console.log(character_data)
   return (
     <div className="App">
       

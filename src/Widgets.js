@@ -5,7 +5,6 @@ import {Link} from 'react-router-dom';
 
 export default function Widgets({characters}) {
 
-  console.log(characters)
   return (
     <div className='container'>
         {characters.map(character => {
