@@ -1,14 +1,17 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 
 export default function Info({characters}) {
     let navigate = useNavigate();
     const { id } = useParams();
     const character = characters[id - 1];
-    console.log(characters.length)
-    if(id <= characters.length){
+    useEffect(() => {
+      if(!id.match("^[0-9]*$") || id > characters.length || id < 1){
+        navigate("/");
+      }
+    }, [id, characters.length])
+    if(id <= characters.length && id >= 1){
       if(characters.length != 0){
-
         return (
           <div className='info'>
             <img src={character.img}></img>
@@ -24,7 +27,4 @@ export default function Info({characters}) {
         )
       }
     }
-    else {
-      navigate('/')
-    }
-}
+  }
